@@ -8,17 +8,21 @@ public class time60 : MonoBehaviour
 {
     [SerializeField] int min, seg;
     [SerializeField] TextMeshPro tiempo;
+    [SerializeField] TextMeshPro puntos;
 
+    //Variables tiempo
     private float restante;
     private bool enMarcha = true;
 
-    // Start is called before the first frame update
+    //Variables puntaje
+    private int pts;
+
+
     void Start()
     {
         restante = seg;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (enMarcha)
@@ -26,11 +30,21 @@ public class time60 : MonoBehaviour
             restante -= Time.deltaTime;
             if (restante < 1)
             {
-                enMarcha = true;
+                enMarcha = false;
             }
-            //int tempMin = Mathf.FloorToInt(restante);
+            //Tiempo
             int tempSeg = Mathf.FloorToInt(restante);
-            tiempo.text = string.Format("{00:00}", restante)+"s";
+            tiempo.text = string.Format("{00:00}", restante) + "s";
+
+            //aqui verificar que la burbuja hizo pop
+            // si si, pts +=1 
+
+            //Puntos
+            int points = pts;
+            puntos.text = string.Format("{0}", pts);
+        }
+        else {
+            tiempo.text = string.Format("Time's up!");
         }
     }
 }
